@@ -6,18 +6,17 @@
 <br>
 
 
-![image](https://github.com/Duhandrade22/Fintech/assets/100982195/7ec45413-30d6-4a6e-a471-d7c4a434a43a)
 
+![login-web](https://github.com/user-attachments/assets/36f1c203-8c38-4b00-b762-de203934f81f)
 
 ## 📲 Responsive mid screen
 
-![image](https://github.com/Duhandrade22/Fintech/assets/100982195/bd2218c5-65ad-4025-8d78-55791a07a8c4)
+![login-tablet](https://github.com/user-attachments/assets/9e8dc2a8-b263-40a0-88a5-e36998f3b43f)
 
 
 ## 📲 Responsive Mobile
 
-![image](https://github.com/Duhandrade22/Fintech/assets/100982195/3ac1f749-dc85-4512-9e80-074a22c091e4)
-
+![login-mobile](https://github.com/user-attachments/assets/8bf8a743-020d-422f-8bd2-32dcf181e854)
 
 ## 🧪 Technologies
 
