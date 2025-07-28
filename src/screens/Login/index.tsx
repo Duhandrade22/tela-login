@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CheckIcon, GoogleIcon, Logo } from "../../assets/svg";
+import { GoogleIcon, Logo } from "../../assets/svg";
 import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 
@@ -7,7 +7,6 @@ const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [rememberMe, setRememberMe] = useState(false);
 
   const { handleEmailLogin, handleGoogleLogin, loading } = useAuth();
 
@@ -56,20 +55,7 @@ const Login = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <div className="flex justify-between items-center mt-8">
-            <div className="flex items-center gap-2 ">
-              <img
-                className="cursor-pointer"
-                src={CheckIcon}
-                alt="check"
-                onClick={() => setRememberMe(!rememberMe)}
-              />
-              <p className="text-sm text-[#1A202C] ">Lembrar de mim</p>
-            </div>
-            <p className="text-sm text-[#1E9E6A] cursor-pointer active:scale-95 transition">
-              Esqueceu sua senha?
-            </p>
-          </div>
+
           <button
             className="bg-[#1E9E6A] text-white rounded p-3 mt-22 w-full cursor-pointer active:scale-95 transition"
             onClick={onEmailLogin}

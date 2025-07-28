@@ -6,6 +6,7 @@ import {
   getAuth,
   signInWithPopup,
   createUserWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 import { app } from "../firebase";
 import { FirebaseError } from "firebase/app";
@@ -90,11 +91,24 @@ export const useAuth = () => {
       setLoading(false);
     }
   };
+  const handleLogout = async (): Promise<void> => {
+    setLoading(true);
+    try {
+      await signOut(auth);
+      toast.success("Logout realizado com sucesso");
+    } catch (error) {
+      toast.error("Erro ao fazer logout");
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
   return {
     handleEmailLogin,
     error,
     handleGoogleLogin,
     loading,
     handleRegister,
+    handleLogout,
   };
 };
