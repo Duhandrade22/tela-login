@@ -2,6 +2,23 @@ import { useEvaluation } from "../../hooks/useEvaluation";
 import StarRating from "../../components/StarRating";
 import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import { Timestamp } from "firebase/firestore";
+
+const formatTimestamp = (timestamp: Timestamp) => {
+  if (!timestamp) return "";
+
+  const date = new Date(
+    timestamp.seconds * 1000 + timestamp.nanoseconds / 1000000
+  );
+
+  return date.toLocaleDateString("pt-BR", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+};
 
 const Evaluation = () => {
   const navigate = useNavigate();
@@ -49,7 +66,10 @@ const Evaluation = () => {
                 <StarRating rating={evaluation.rating} />
                 <p className="mt-2">{evaluation.description}</p>
                 <p className="text-sm text-gray-500 mt-1">
-                  ID do usuário: {evaluation.userId}
+                  {formatTimestamp(evaluation.createdAt)}
+                </p>
+                <p className="text-sm text-gray-500 mt-1">
+                  {evaluation.userName}
                 </p>
               </div>
             ))
