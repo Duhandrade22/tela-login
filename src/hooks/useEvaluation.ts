@@ -28,28 +28,7 @@ export const useEvaluation = () => {
           ...doc.data(),
         })) as Evaluation[];
 
-        // const evaluationWithUserName = await Promise.all(
-        //   evaluationsData.map(async (evaluation) => {
-        //     try {
-        //       const userDoc = await getDoc(doc(db, "users", evaluation.userId));
-        //       const userData = userDoc.data();
-        //       return {
-        //         ...evaluation,
-        //         userName:
-        //           userData?.name || userData?.displayName || " Usuário Anônimo",
-        //       };
-        //     } catch (error) {
-        //       console.error("Erro ao buscar nome do usuário:", error);
-        //       return {
-        //         ...evaluation,
-        //         userName: "Usuário Anônimo",
-        //       };
-        //     }
-        //   })
-        // );
-
         setEvaluations(evaluationsData);
-        console.log("dados recebidos", evaluationsData);
 
         setLoading(false);
       } catch (error) {

@@ -13,7 +13,6 @@ const Register = () => {
     e.preventDefault();
     const result = await handleRegister(email, password);
     if (result) {
-      console.log("Conta criada com sucesso", result.user);
       navigate("/");
     }
   };
