@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Timestamp } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import EvaluationFilter from "../../components/EvaluationFilter";
+import SearchFilter from "../../components/SearchFilter";
 
 const formatTimestamp = (timestamp: Timestamp) => {
   if (!timestamp) return "";
@@ -27,13 +28,29 @@ const Evaluation = () => {
   const { evaluations, loading, error } = useEvaluation();
   const { handleLogout } = useAuth();
   const [sortedEvaluations, setSortedEvaluations] = useState([...evaluations]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredEvaluations, setFilteredEvaluations] = useState([
+    ...evaluations,
+  ]);
 
   useEffect(() => {
-    setSortedEvaluations([...evaluations]);
-  }, [evaluations]);
+    const filtered = evaluations.filter((evaluation) => {
+      const searchLower = searchTerm.toLowerCase();
+      return (
+        evaluation.userName.toLowerCase().includes(searchLower) ||
+        evaluation.description.toLowerCase().includes(searchLower)
+      );
+    });
+    setFilteredEvaluations(filtered);
+    setSortedEvaluations(filtered);
+  }, [evaluations, searchTerm]);
+
+  const handleSearch = (term: string) => {
+    setSearchTerm(term);
+  };
 
   const handleSort = (sortBy: "date" | "rating", order: "asc" | "desc") => {
-    const sorted = [...evaluations].sort((a, b) => {
+    const sorted = [...filteredEvaluations].sort((a, b) => {
       if (sortBy === "date") {
         const timeA = a.createdAt.seconds;
         const timeB = b.createdAt.seconds;
@@ -70,12 +87,14 @@ const Evaluation = () => {
   return (
     <div className="min-h-screen bg-[#F3FFF2] p-6">
       <div className="max-w-250 mx-auto">
-        <div className="flex items-center justify-between  mb-6">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
           <h1 className="text-2xl font-bold text-[#1A202C]mb-6 mt-6">
             Avaliações
           </h1>
           <EvaluationFilter onSortChange={handleSort} />
         </div>
+
+        <SearchFilter onSearch={handleSearch} />
 
         <div className="bg-[#fff] rounded-lg shadow-lg p-6 mt-6">
           {sortedEvaluations.length === 0 ? (
@@ -99,27 +118,6 @@ const Evaluation = () => {
           )}
         </div>
 
-        <div className="bg-[#fff] rounded-lg shadow-lg p-6 mt-6">
-          {evaluations.length === 0 ? (
-            <p>Nenhuma avaliação encontrada</p>
-          ) : (
-            evaluations.map((evaluation) => (
-              <div
-                key={evaluation.id}
-                className="mb-4 border-gray-300 border rounded p-4"
-              >
-                <StarRating rating={evaluation.rating} />
-                <p className="mt-2">{evaluation.description}</p>
-                <p className="text-sm text-gray-500 mt-1">
-                  {formatTimestamp(evaluation.createdAt)}
-                </p>
-                <p className="text-sm text-gray-500 mt-1">
-                  {evaluation.userName}
-                </p>
-              </div>
-            ))
-          )}
-        </div>
         <div className="mt-6 flex justify-center">
           <button
             onClick={onLogout}

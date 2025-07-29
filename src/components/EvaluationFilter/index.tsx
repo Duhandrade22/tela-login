@@ -19,7 +19,7 @@ const EvaluationFilter = ({ onSortChange }: EvaluationFilterProps) => {
   };
 
   return (
-    <div className="mb-4 flex gap-4 items-center">
+    <div className="mt-4 flex gap-4 items-center">
       <div className="flex items-center gap-2">
         <label className="text-sm font-medium text-gray-700">Filtar por:</label>
         <select
@@ -27,7 +27,7 @@ const EvaluationFilter = ({ onSortChange }: EvaluationFilterProps) => {
           onChange={(e) =>
             handleSortChange(e.target.value as "date" | "rating")
           }
-          className="border border-gray-300 rounded-md p-2"
+          className="border bg-white border-gray-300 rounded-md p-2"
         >
           <option value="date">Data</option>
           <option value="rating">Avaliação</option>
@@ -39,10 +39,10 @@ const EvaluationFilter = ({ onSortChange }: EvaluationFilterProps) => {
         <select
           value={order}
           onChange={(e) => handleOrderChange(e.target.value as "asc" | "desc")}
-          className="border border-gray-300 rounded-md p-2"
+          className="border bg-white border-gray-300 rounded-md p-2"
         >
-          <option value="asc">Crescente</option>
-          <option value="desc">Decrescente</option>
+          <option value="asc">A-Z</option>
+          <option value="desc">Z-A</option>
         </select>
       </div>
     </div>
