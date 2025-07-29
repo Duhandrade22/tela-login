@@ -1,8 +1,5 @@
 import { SearchIcon } from "../../assets/svg";
-
-interface SearchFilterProps {
-  onSearch: (search: string) => void;
-}
+import type { SearchFilterProps } from "./modules";
 
 const SearchFilter = ({ onSearch }: SearchFilterProps) => {
   return (

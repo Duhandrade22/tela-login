@@ -1,8 +1,5 @@
 import { useState } from "react";
-
-interface EvaluationFilterProps {
-  onSortChange: (sortBy: "date" | "rating", order: "asc" | "desc") => void;
-}
+import type { EvaluationFilterProps } from "./modules";
 
 const EvaluationFilter = ({ onSortChange }: EvaluationFilterProps) => {
   const [sortBy, setSortBy] = useState<"date" | "rating">("date");

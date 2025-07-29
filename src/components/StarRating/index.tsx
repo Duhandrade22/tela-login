@@ -1,8 +1,5 @@
 import { GreyStar, YellowStar } from "../../assets/svg";
-
-interface StarRatingProps {
-  rating: number;
-}
+import type { StarRatingProps } from "./modules";
 
 const StarRating = ({ rating }: StarRatingProps) => {
   return (
